@@ -45,109 +45,13 @@
 #################################################
 
 # showRunTXT = """
-#     Router# show running-config
-# Building configuration...
-
-# Current configuration : 6208 bytes
-# !
-# version 17.6
-# service timestamps debug datetime msec
-# service timestamps log datetime msec
-# service password-encryption
-# !
-# hostname R1-LAB
-# !
-# boot-start-marker
-# boot-end-marker
-# !
-# logging buffered 51200 warnings
-# no aaa new-model
-# clock timezone CST -6 0
-# !
-# ip cef
-# no ipv6 cef
-# !
 # snmp-server community private RO
 # snmp-server location LAB-ROUTER-01
-# !
-# interface GigabitEthernet0/0
-#  description *** Connection to ISP ***
-#  ip address 200.1.1.2 255.255.255.252
-#  ip nat outside
-#  no shut
-# !
-# interface GigabitEthernet0/1
-#  description *** LAN Segment ***
-#  ip address 192.168.10.1 255.255.255.0
-#  ip nat inside
-#  no shut
-# !
-# interface GigabitEthernet0/2
-#  description *** DMZ Segment ***
-#  ip address 10.10.10.1 255.255.255.0
-#  no shut
-# !
-# interface Loopback0
-#  ip address 1.1.1.1 255.255.255.255
-# !
-# router ospf 10
-#  router-id 1.1.1.1
-#  network 192.168.10.0 0.0.0.255 area 0
-#  network 10.10.10.0 0.0.0.255 area 0
-#  passive-interface default
-#  no passive-interface GigabitEthernet0/0
-# !
-# router bgp 65001
-#  bgp log-neighbor-changes
-#  neighbor 200.1.1.1 remote-as 65000
-#  neighbor 200.1.1.1 description *** ISP EDGE ***
-#  neighbor 200.1.1.1 update-source GigabitEthernet0/0
-# !
-#  address-family ipv4
-#   network 192.168.10.0 mask 255.255.255.0
-#   network 10.10.10.0 mask 255.255.255.0
-#   neighbor 200.1.1.1 activate
-#  exit-address-family
-# !
-# ip route 0.0.0.0 0.0.0.0 200.1.1.1
-# !
-# ip nat inside source list NAT_ACL interface GigabitEthernet0/0 overload
-# access-list 1 permit 192.168.10.0 0.0.0.255
-# access-list 1 permit 10.10.10.0 0.0.0.255
-# !
-# banner motd ^C
-# *********************************************
-# *   Unauthorized access to this device is   *
-# *   strictly prohibited and will be logged  *
-# *********************************************
-# ^C
-# !
-# line con 0
-#  logging synchronous
-#  exec-timeout 15 0
-#  privilege level 15
-# line vty 0 4
-#  transport input ssh
-#  login local
-# line vty 5 15
-#  transport input ssh
-#  login local
-# !
-# username admin privilege 15 secret 9 $9$N9JF9fj3Fi39nfj3f93nf39
-# username netops privilege 15 password 0 labpass
-# !
-# ip ssh version 2
-# crypto key generate rsa modulus 2048
-# !
-# ntp server 132.163.97.1 prefer
-# !
-# end
-# Router#
 # """
 
 # community = ""
 
-# if "private" in showRunTXT:
+# if "private" not in showRunTXT:
 #     print("There is a private SNMP Community")
 #     community = "private"
 
@@ -163,3 +67,175 @@
 #     print("Nothing was found")
 
 # print("The community is:", community)
+
+#################################################
+#
+#       While   For
+#
+#################################################
+
+# count = 0
+
+# while count <= 5:
+#     print("Count is:", count)
+#     count = count + 1
+#     # 0 + 1 = 1
+#     # 1 + 1 = 2
+#     # 2 + 1 = 3
+#     # 3 + 1 = 4
+#     # 4 + 1 = 5
+
+# print("Count finished, now it's:", count)
+
+# while True:
+#     print("Infinite Loop")
+
+# while True:
+#     name = input("Please input your name:")
+#     lastname = input("Please input your last name:")
+#     age = input("Please input your age:")
+
+#     name = str(name)
+#     lastname = str(lastname)
+#     age = int(age)
+
+#     if age >= 18:
+#         print(f"Welcome: {name} {lastname}, you're over 18")
+#         print("You may enter")
+#         break
+#     else:
+#         print(f"Welcome: {name} {lastname}, you're not over 18 " \
+#               f"You may not enter, current age:{age}")
+
+#################################################
+
+# name = "Luis"
+# print(name[3])
+
+#################################################
+
+# totalPages = 10
+
+# for page in range(totalPages):
+#     print("Current page is:", page)
+ 	
+# print("All the pages have been saved")
+
+# for page in range(10):
+#     print("Current page is:", page)
+ 	
+# print("All the pages have been saved")
+
+# listBooks = [
+#     "The Pragmatic Programmer by Andrew Hunt & David Thomas",
+#     "Sapiens: A Brief History of Humankind by Yuval Noah Harari",
+#     "Clean Code by Robert C. Martin"
+# ]
+
+# for book in listBooks:
+#     print(f"Currently reading: {book}")
+
+# print("Total amount of books read:", len(listBooks))
+
+#################################################
+#
+#       Try   Except
+#
+#################################################
+# try:
+#     name = input("Please input your name:")
+#     age = input("Please input your age:")
+
+#     if age >= 18:
+#         print("You may enter") 
+
+# except:
+# 	print("Error during age calculation")
+	
+# except ValueError:
+# 	# age = int(input("Please input your age:"))
+#     # age = int(age)
+#     print("Value error: Age must be a number")
+	
+# except Exception as error:
+# 	print(f"Exception error: {error}")
+
+# except:
+# 	print("General Error")
+      
+#################################################
+#
+#       Functions
+#
+#################################################
+
+# def getName():
+# 	name = input("What is your name?:")
+#   print(f"Your name is: {name}")
+
+# getName()
+
+    ########## ########## ##########
+
+# def getLastName():
+# 	lastName = input("What is your last name?:")
+# 	return lastName
+	
+# lastName = getLastName()
+# print(f"Your last name is: {lastName}")
+
+    ########## ########## ##########
+
+# def add(a, b):
+# 	return a + b
+
+# result = add(1, 2)
+# print(f"The sum is: {result}")
+
+    ########## ########## ##########
+
+# def texts(a, b):
+# 	return a + b
+
+# result = texts("Luis", "Alfaro")
+# print(f"The result is: {result}")
+
+    ########## ########## ##########    
+
+# def defaultValue(textA, textB="Not provided"):
+# 	return textA + textB
+ 	
+# result = defaultValue("Luis")
+# print(f"The result is: {result}")
+
+    ########## ########## ##########
+
+    # Now we need to build a function that will check the age
+# def age(ageNum):
+#     if ageNum >= 18:
+#         print("You may enter.")
+#     else:
+#         print("You’re too young.")
+
+# age(18)
+
+    # Now we need to add the try/except
+
+# def age(ageNum):
+# 	try:
+# 		if ageNum >= 18:
+# 			print(f"Age is: {ageNum}, you may enter")
+# 		else:
+# 			print(f"Age is: {ageNum}, see you next time")
+# 	except Exception as error:
+# 		 print(f"Error during age calculation: {error} ")
+
+# age(1)
+
+    ########## ########## ##########
+
+# def fullName(name, lastName=""):
+# 	getName()
+# 	getLastName()
+# 	fullname = name + lastName
+# 	return fullname
